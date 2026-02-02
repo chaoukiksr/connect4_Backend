@@ -11,6 +11,8 @@ router.get('/', async (req, res) => {
    }
 });
 
-
+router.post('/api/games', (req,res)=>{
+   const body = req.body
+})
 
 module.exports = router;
