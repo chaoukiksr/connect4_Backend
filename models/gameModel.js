@@ -5,6 +5,8 @@ const Table = 'games';
 
 module.exports = {
    createGame: async (gameData) =>{
+      console.log('canonical sequence from model: ', gameData.canonical_sequence);
+      
       const [id] = await db(Table).insert({
          move_sequence: gameData.move_sequence,
          canonical_sequence:gameData.canonical_sequence,
@@ -19,16 +21,21 @@ module.exports = {
       })
       return db(Table).where({'id':id}).first();
    },
+   findByMoveSequesnce : async (move_sequence) =>{
+      return await db(Table).where('move_sequence',move_sequence).first();
+   },
    updateGame: async () =>{
 
    },
    findAll: async () =>{
-
+      return db(Table)
+      .select('*')
+      .orderBy('created_at', 'desc');
    },
    findOne: async () =>{
 
    },
-   findCanonical: async () =>{
-
+   findByCanonical: async (canonicalSequence) =>{
+      return await db(Table).where('canonical_sequence', canonicalSequence).first();
    }
 }
