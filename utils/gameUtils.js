@@ -39,31 +39,32 @@ module.exports = {
       }
       return false;
    },
-   analyzeGame: (moveSequence, numRows, numCols) => {
+   analyzeGame: (moveSequence, startingPlayer, numRows, numCols) => {
       // 1. Create empty board
       const board = Array(numRows).fill(null).map(() => Array(numCols).fill(0));
-
+      let currentPlayer = startingPlayer;
       // 2. Replay each move
       for (let i = 0; i < moveSequence.length; i++) {
          const col = parseInt(moveSequence[i]);
-         const player = (i % 2 === 0) ? 1 : 2;  // Player 1 starts
+          
 
          // 3. Find landing row (bottom to top)
          for (let row = numRows - 1; row >= 0; row--) {
             if (board[row][col] === 0) {
                // 4. Place piece
-               board[row][col] = player;
+               board[row][col] = currentPlayer;
 
                // 5. Check win
-               if (module.exports.checkWin(board, row, col, player, numRows, numCols)) {
+               if (module.exports.checkWin(board, row, col, currentPlayer, numRows, numCols)) {
                   return {
                      status: 'completed',
-                     result: player === 1 ? 'player1_wins' : 'player2_wins'
+                     result: currentPlayer === 1 ? 'player1_wins' : 'player2_wins'
                   };
                }
                break;
             }
          }
+         currentPlayer = currentPlayer === 1 ? 2 : 1;
       }
 
       // 6. Check if board is full (draw) or in progress

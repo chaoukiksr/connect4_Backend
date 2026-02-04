@@ -6,7 +6,7 @@ module.exports = {
    getAllGames: async () =>{
       return gameModel.findAll();
    },
-   saveGame : async (moveSequence, boardRows, boardCols, importedFrom = null) =>{
+   saveGame : async (moveSequence, startingPlayer, boardRows, boardCols, importedFrom = null) =>{
       //check for duplicat game
       const existingGame = await gameModel.findByMoveSequesnce(moveSequence);
       if(existingGame) {
@@ -26,12 +26,13 @@ module.exports = {
 
       // analyze the game
 
-      const {status, result} = analyzeGame(moveSequence, boardRows, boardCols);
+      const {status, result} = analyzeGame(moveSequence,startingPlayer, boardRows, boardCols);
 
       //save the game
 
       const newGame = await gameModel.createGame({
          move_sequence: moveSequence,
+         starting_player:startingPlayer,
          canonical_sequence: canonicalSequence,
          symmetric_game_id: symmetricGame ?  symmetricGame.id : null,
          total_moves: moveSequence.length,

@@ -14,7 +14,15 @@ module.exports = {
    },
    create : async(req,res) =>{
     try {
-       const { moveSequence, boardRows, boardCols, importedFrom } = req.body;
+       const { moveSequence, startingPlayer, boardRows, boardCols, importedFrom } = req.body;
+
+       // Convert startingPlayer to integer if it's a string like 'red' or 'yellow'
+       let startingPlayerInt;
+       if (typeof startingPlayer === 'string') {
+          startingPlayerInt = startingPlayer.toLowerCase() === 'red' ? 1 : 2;
+       } else {
+          startingPlayerInt = startingPlayer || 1;
+       }
 
        // Validate input
        if (!moveSequence || typeof moveSequence !== 'string') {
@@ -32,6 +40,7 @@ module.exports = {
        //call game service to save the game
        const result = await gameService.saveGame(
           moveSequence,
+          startingPlayerInt,
           boardRows,
           boardCols,
           importedFrom

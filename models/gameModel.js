@@ -9,6 +9,7 @@ module.exports = {
       
       const [id] = await db(Table).insert({
          move_sequence: gameData.move_sequence,
+         starting_player: gameData.starting_player,
          canonical_sequence:gameData.canonical_sequence,
          symmetric_game_id:gameData.symmetric_game_id,
          total_moves: gameData.total_moves,
@@ -24,8 +25,9 @@ module.exports = {
    findByMoveSequesnce : async (move_sequence) =>{
       return await db(Table).where('move_sequence',move_sequence).first();
    },
-   updateGame: async () =>{
-
+   updateGame: async (id, updateData) =>{
+      await db(Table).where('id', id).update(updateData);
+      return db(Table).where('id', id).first();
    },
    findAll: async () =>{
       return db(Table)

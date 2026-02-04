@@ -22,6 +22,7 @@ exports.up = function(knex) {
          // UNIQUE pour éviter les doublons
          table.string('move_sequence', 100).notNullable().unique();
          
+         table.integer('starting_player').notNullable();
          // Forme canonique pour détecter les symétriques
          // La plus petite entre la séquence et son miroir
          table.string('canonical_sequence', 100).notNullable().index();
