@@ -1,15 +1,16 @@
+// Debug: print DB env variables
 require('dotenv').config();
 module.exports = {
    client:'mysql2',
    connection:{
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      port: process.env.DB_PORT,
+      host: "gateway01.eu-central-1.prod.aws.tidbcloud.com",
+      user: "tPqNhDuBbqhWTB8.root",
+      password: "GWZAPxVGHv4pNM2Q",
+      database: "connect4",
+      port: 4000,
       ssl: {
-         minVersion: 'TLSv1.2',
-         rejectUnauthorized: true
+          minVersion: 'TLSv1.2',
+          rejectUnauthorized: false
       }
    },
    migrations:{

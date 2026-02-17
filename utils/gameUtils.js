@@ -1,6 +1,6 @@
 module.exports = {
     getCanonicalSequence: (moveSequence, numCols) =>{
-      let mirrored = moveSequence.split('').map(col => (numCols - 1) - parseInt(col)).join('');
+      let mirrored = moveSequence.split('').map(col => (numCols + 1) - parseInt(col)).join('');
       return moveSequence < mirrored ? moveSequence : mirrored;
    },
    checkWin : (board, row, col, player, numRows, numCols) =>{
