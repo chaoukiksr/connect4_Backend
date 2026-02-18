@@ -1,5 +1,6 @@
 const gameModel = require('../models/gameModel');
-const { getCanonicalSequence, analyzeGame } = require('../utils/gameUtils');
+const db = require('../db/knex');
+const { getCanonicalSequence, analyzeGame, checkGameExists } = require('../utils/gameUtils');
 
 module.exports = {
    //get all games
@@ -50,12 +51,21 @@ module.exports = {
          throw new Error(`Invalid signature: too long (${finalSignature.length} chars, max 255)`);
       }
 
-      // Check if game already exists
-      const existingGame = await gameModel.findBySignature(finalSignature);
-      if (existingGame) {
+      // Check if game already exists (original or mirror signature)
+      const duplicateCheck = await checkGameExists(db, finalSignature);
+      if (duplicateCheck.exists) {
+         let message = 'Game already exists';
+         if (duplicateCheck.type === 'original') {
+            message = `Game with signature ${finalSignature} already exists`;
+         } else if (duplicateCheck.type === 'mirror') {
+            message = `Mirror game with signature ${duplicateCheck.mirrorSignature} already exists`;
+         }
          return {
             success: false,
-            existingGame
+            error: message,
+            duplicateType: duplicateCheck.type,
+            existingGame: duplicateCheck.existing,
+            mirrorSignature: duplicateCheck.mirrorSignature
          };
       }
 

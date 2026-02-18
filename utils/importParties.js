@@ -1,6 +1,7 @@
 
 const { insertPartie, insertSituations } = require('../models/gameModel.js');
 const { generateSituation } = require('./trainingUtils.js');
+const { generateMirrorSignature, checkGameExists } = require('./gameUtils.js');
 const db = require('../db/knex.js');
 
 const fs = require('fs');
@@ -75,10 +76,14 @@ async function importAll() {
             const gameData = parseGameFile(filePath);
             log(`Parsed: signature=${gameData.signature}, status=${gameData.status}, joueur_depart=${gameData.joueur_depart}, joueur_gagnant=${gameData.joueur_gagnant}`);
             
-            // Check if game already exists
-            const existing = await db('partie').where('signature', gameData.signature).first();
-            if (existing) {
-               log(`Skipped (duplicate): Game with signature ${gameData.signature} already exists`);
+            // Check if game or its mirror already exists
+            const duplicateCheck = await checkGameExists(db, gameData.signature);
+            if (duplicateCheck.exists) {
+               if (duplicateCheck.type === 'original') {
+                  log(`Skipped (duplicate original): Game with signature ${gameData.signature} already exists`);
+               } else {
+                  log(`Skipped (duplicate mirror): Mirrored game with signature ${duplicateCheck.mirrorSignature} already exists`);
+               }
                skipCount++;
                continue;
             }

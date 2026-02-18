@@ -3,47 +3,39 @@ Files: game_801839027.json, game_806484855.json, game_806493437.json, game_80649
 
 --- Processing game_801839027.json ---
 Parsed: signature=9996566588362444845445653777, status=finished, joueur_depart=Y, joueur_gagnant=Y
-✓ Inserted partie: ID=1795820, signature=9996566588362444845445653777
-✓ Inserted 28 situations
+Skipped (duplicate original): Game with signature 9996566588362444845445653777 already exists
 
 --- Processing game_806484855.json ---
 Parsed: signature=452431445215754554211333233122, status=finished, joueur_depart=R, joueur_gagnant=Y
-✓ Inserted partie: ID=1795821, signature=452431445215754554211333233122
-✓ Inserted 30 situations
+Skipped (duplicate original): Game with signature 452431445215754554211333233122 already exists
 
 --- Processing game_806493437.json ---
 Parsed: signature=4544332134544331113252, status=finished, joueur_depart=null, joueur_gagnant=Y
-✓ Inserted partie: ID=1795822, signature=4544332134544331113252
-✓ Inserted 22 situations
+Skipped (duplicate original): Game with signature 4544332134544331113252 already exists
 
 --- Processing game_806494806.json ---
 Parsed: signature=44444453373327533777762221111112255, status=finished, joueur_depart=null, joueur_gagnant=Y
-✓ Inserted partie: ID=1795823, signature=44444453373327533777762221111112255
-✓ Inserted 35 situations
+Skipped (duplicate original): Game with signature 44444453373327533777762221111112255 already exists
 
 --- Processing game_806499528.json ---
 Parsed: signature=4523333442565544673, status=finished, joueur_depart=null, joueur_gagnant=Y
-✓ Inserted partie: ID=1795824, signature=4523333442565544673
-✓ Inserted 19 situations
+Skipped (duplicate original): Game with signature 4523333442565544673 already exists
 
 --- Processing game_806763649.json ---
 Parsed: signature=8535535533966746664, status=finished, joueur_depart=Y, joueur_gagnant=Y
-✓ Inserted partie: ID=1795825, signature=8535535533966746664
-✓ Inserted 19 situations
+Skipped (duplicate original): Game with signature 8535535533966746664 already exists
 
 --- Processing game_806776639.json ---
 Parsed: signature=3736589742477544335585222, status=finished, joueur_depart=Y, joueur_gagnant=Y
-✓ Inserted partie: ID=1795826, signature=3736589742477544335585222
-✓ Inserted 25 situations
+Skipped (duplicate original): Game with signature 3736589742477544335585222 already exists
 
 --- Processing game_806886109.json ---
 Parsed: signature=5555566668923323688566565586889823322338829923322191199911119117747, status=finished, joueur_depart=null, joueur_gagnant=Y
-✓ Inserted partie: ID=1795827, signature=5555566668923323688566565586889823322338829923322191199911119117747
-✓ Inserted 67 situations
+Skipped (duplicate original): Game with signature 5555566668923323688566565586889823322338829923322191199911119117747 already exists
 
 === Import Summary ===
 Total files: 8
-Successful: 8
-Skipped (duplicates): 0
+Successful: 0
+Skipped (duplicates): 8
 Errors: 0
 DB connection closed.

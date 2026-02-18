@@ -54,9 +54,10 @@ module.exports = {
        // If error because of duplicates
        if (!result.success) {
           return res.status(409).json({
-             error: 'game already exists',
+             error: result.error,
+             duplicateType: result.duplicateType,
              existingGame: result.existingGame,
-             duplicateType: 'exact'
+             mirrorSignature: result.mirrorSignature
           });
        }
 
