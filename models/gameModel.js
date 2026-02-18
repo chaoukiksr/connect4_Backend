@@ -1,29 +1,13 @@
+const fs = require("fs");
+const path = require("path");
+
 const db = require('../db/knex');
 
 const Table = 'partie';
 
 module.exports = {
-   createGame: async (gameData) => {
-      const [id] = await db(Table).insert({
-         ligne_gagnante: gameData.move_sequence || null,
-         move_sequence: gameData.move_sequence || null,
-         joueur_depart: gameData.starting_player || null,
-         signature: gameData.canonical_sequence || null,
-         status: gameData.status || 'pending',
-         joueur_gagnant: gameData.result || null,
-         mode: gameData.mode || null,
-         type_partie: gameData.type_partie || null,
-         total_moves: gameData.total_moves || null,
-         symmetric_game_id: gameData.symmetric_game_id || null,
-         board_rows: gameData.board_rows || 6,
-         board_cols: gameData.board_cols || 7,
-         created_at: gameData.created_at || new Date()
-      });
-      return db(Table).where({ id_partie: id }).first();
-   },
-
-   findByMoveSequence: async (move_sequence) => {
-      return await db(Table).where('move_sequence', move_sequence).first();
+   findBySignature: async (signature) => {
+      return await db(Table).where('signature', signature).first();
    },
 
    updateGame: async (id, updateData) => {
@@ -34,14 +18,14 @@ module.exports = {
    findAll: async () => {
       return db(Table)
          .select([
-            'id_partie as id',
-            
-            'joueur_depart as starting_player',
-            'signature',
-            'status',
-            'joueur_gagnant as result',
+            'id_partie',
             'mode',
             'type_partie',
+            'status',
+            'joueur_depart',
+            'joueur_gagnant',
+            'ligne_gagnante',
+            'signature',
             'created_at'
          ])
          .orderBy('created_at', 'desc');
@@ -54,14 +38,26 @@ module.exports = {
    findByCanonical: async (canonicalSequence) => {
       return await db(Table).where('signature', canonicalSequence).first();
    },
-   insertPartie : async (signature) =>{
+   insertPartie : async ({
+      joueur_depart,
+      signature,
+      status,
+      joueur_gagnant,
+      mode,
+      type_partie,
+      ligne_gagnante
+   }) => {
+      console.log('from insert in the model: ', mode,type_partie,joueur_depart,joueur_gagnant,ligne_gagnante,signature);
+      
       const [id_partie] = await db('partie')
          .insert({
-            mode: 'standard',
-            type_partie: 'ranked',
-            status: 'finished',
-            signature: signature
-         })
+            mode: mode || 'standard',
+            type_partie: type_partie || 'random',
+            status: status || 'finished',
+            joueur_depart: joueur_depart || null, joueur_gagnant: joueur_gagnant || null,ligne_gagnante: ligne_gagnante || null,
+            signature: signature || null,
+            created_at: new Date()
+         });
       return db('partie').where({ id_partie }).first();
    },
    // 2️⃣ Insert situations into DB and set precedent/suivant

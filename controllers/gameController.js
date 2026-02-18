@@ -14,59 +14,62 @@ module.exports = {
    },
    create : async(req,res) =>{
     try {
-       const { moveSequence, startingPlayer, boardRows, boardCols, importedFrom } = req.body;
-
-       // Convert startingPlayer to integer if it's a string like 'red' or 'yellow'
-       let startingPlayerInt;
-       if (typeof startingPlayer === 'string') {
-          startingPlayerInt = startingPlayer.toLowerCase() === 'red' ? 1 : 2;
-       } else {
-          startingPlayerInt = startingPlayer || 1;
-       }
+       const { signature, startingPlayer, mode, type_partie, status, winner, ligne_gagnante } = req.body;
 
        // Validate input
-       if (!moveSequence || typeof moveSequence !== 'string') {
+       if (!signature || typeof signature !== 'string') {
           return res.status(400).json({
-             error: 'moveSequence is required and must be a string'
+             error: 'signature is required and must be a string'
           });
        }
 
-       if (!boardRows || !boardCols) {
+       if (!mode || typeof mode !== 'string') {
           return res.status(400).json({
-             error: 'boardRows and boardCols are required'
+             error: 'mode is required and must be a string'
           });
        }
 
-       //call game service to save the game
+       // Provide default status if missing
+       const finalStatus = status && typeof status === 'string' ? status : 'finished';
+
+       // Call game service to save the game
+       console.log('from the controller', signature,
+          mode,
+          type_partie,
+          finalStatus,
+          startingPlayer,
+          winner,
+          ligne_gagnante);
+       
        const result = await gameService.saveGame(
-          moveSequence,
-          startingPlayerInt,
-          boardRows,
-          boardCols,
-          importedFrom
-       )
+          signature,
+          mode,
+          type_partie || 'random',
+          finalStatus,
+          startingPlayer,
+          winner,
+          ligne_gagnante
+       );
 
-       //if erros because of duplicats
+       // If error because of duplicates
        if (!result.success) {
           return res.status(409).json({
              error: 'game already exists',
              existingGame: result.existingGame,
-             duplicatType: 'exact'
-          })
-
+             duplicateType: 'exact'
+          });
        }
-       //if success
+
+       // If success
        res.status(201).json({
           message: 'Game saved with success',
-          game: result.game,
-          isSymmetric: result.isSymmetric,
-          symmetricOf: result.symmetricOf
-       })
+          game: result.game
+       });
     } catch(error){
       console.error('Error saving the game from the controller: ', error);
       res.status(500).json({
-         error:error.message
-      })
+         error: error.message
+      });
     }
    }
 }
