@@ -5,9 +5,16 @@
  * - situation
  */
 
+const { table } = require("../db/knex");
+
 exports.up = function (knex) {
    return knex.schema
-
+      .createTable('user', table => {
+         table.increments('id_user').primary();
+         table.string('username', 30).notNullable();
+         table.string('email',50).notNullable();
+         table.string('password', 60).notNullable();
+   })
       // ============================================
       // TABLE: partie
       // ============================================
@@ -50,6 +57,8 @@ exports.up = function (knex) {
          table.integer('precedent').nullable();
          table.integer('suivant').nullable();
       });
+      
+      
 };
 
 exports.down = function (knex) {

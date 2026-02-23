@@ -13,9 +13,10 @@ app.use(express.json());
 
 const gameRoutes = require('./routes/games')
 const situationRoutes = require('./routes/situations');
+const userRoutes = require('./routes/user.js')
 app.use('/api/games', gameRoutes);
 app.use('/api', situationRoutes);
-
+app.use('/user', userRoutes)
 app.get('/',(req,res)=>{
    res.json({message:'Connect4 api is working '})
 })
