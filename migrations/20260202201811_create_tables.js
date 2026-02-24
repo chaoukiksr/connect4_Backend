@@ -14,6 +14,10 @@ exports.up = function (knex) {
          table.string('username', 30).notNullable();
          table.string('email',50).notNullable();
          table.string('password', 60).notNullable();
+         table.enu('role', ['user','admin'],{
+            useNative:true,
+            enumName:'user_role'
+         }).notNullable().defaultTo('user');
    })
       // ============================================
       // TABLE: partie
