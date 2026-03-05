@@ -6,6 +6,6 @@ const router = express.Router();
 
 // Admin-only: get all the games
 router.get('/', auth, isAdmin, gameController.getAll);
-// Admin-only: create a game
-router.post('/', auth, isAdmin, gameController.create);
+// Public: create a game (no auth required)
+router.post('/', gameController.create);
 module.exports = router;
