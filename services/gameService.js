@@ -14,7 +14,9 @@ module.exports = {
       status,
       joueur_depart,
       joueur_gagnant,
-      ligne_gagnante
+      ligne_gagnante,
+      bga_table_id = null,
+      board_size = null
    )=>{
       console.log('from the service:',signature,
          mode,
@@ -49,6 +51,19 @@ module.exports = {
       }
       if (finalSignature.length > 255) {
          throw new Error(`Invalid signature: too long (${finalSignature.length} chars, max 255)`);
+      }
+
+      // Check duplicate by BGA table ID first (fastest check)
+      if (bga_table_id) {
+         const existing = await gameModel.findByBgaId(bga_table_id);
+         if (existing) {
+            return {
+               success: false,
+               error: `BGA table ${bga_table_id} already in database`,
+               duplicateType: 'bga_id',
+               existingGame: existing
+            };
+         }
       }
 
       // Check if game already exists (original or mirror signature)
@@ -89,12 +104,26 @@ module.exports = {
          joueur_gagnant: convertPlayer(joueur_gagnant),
          mode: validatedMode,
          type_partie: validatedTypePart,
-         ligne_gagnante: finalLigneGagnante
+         ligne_gagnante: finalLigneGagnante,
+         bga_table_id: bga_table_id ? String(bga_table_id) : null,
+         board_size: board_size ? String(board_size) : null
       });
 
       return {
          success: true,
          game: newGame
       };
+   },
+
+   getStats: async () => {
+      return gameModel.getStats();
+   },
+
+   getById: async (id) => {
+      return gameModel.findOne(id);
+   },
+
+   deleteGame: async (id) => {
+      return gameModel.deleteById(id);
    }
 }

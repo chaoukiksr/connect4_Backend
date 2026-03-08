@@ -14,7 +14,8 @@ module.exports = {
    },
    create : async(req,res) =>{
     try {
-       const { signature, startingPlayer, mode, type_partie, status, winner, ligne_gagnante } = req.body;
+       const { signature, startingPlayer, mode, type_partie, status, winner, ligne_gagnante,
+               bga_table_id, board_size } = req.body;
 
        // Validate input
        if (!signature || typeof signature !== 'string') {
@@ -32,15 +33,6 @@ module.exports = {
        // Provide default status if missing
        const finalStatus = status && typeof status === 'string' ? status : 'finished';
 
-       // Call game service to save the game
-       console.log('from the controller', signature,
-          mode,
-          type_partie,
-          finalStatus,
-          startingPlayer,
-          winner,
-          ligne_gagnante);
-       
        const result = await gameService.saveGame(
           signature,
           mode,
@@ -48,7 +40,9 @@ module.exports = {
           finalStatus,
           startingPlayer,
           winner,
-          ligne_gagnante
+          ligne_gagnante,
+          bga_table_id || null,
+          board_size || null
        );
 
        // If error because of duplicates
@@ -72,5 +66,34 @@ module.exports = {
          error: error.message
       });
     }
+   },
+
+   getStats: async (req, res) => {
+      try {
+         const stats = await gameService.getStats();
+         res.json(stats);
+      } catch (error) {
+         console.error('Error fetching stats:', error);
+         res.status(500).json({ error: error.message });
+      }
+   },
+
+   getById: async (req, res) => {
+      try {
+         const game = await gameService.getById(Number(req.params.id));
+         if (!game) return res.status(404).json({ error: 'Game not found' });
+         res.json({ game });
+      } catch (error) {
+         res.status(500).json({ error: error.message });
+      }
+   },
+
+   deleteGame: async (req, res) => {
+      try {
+         await gameService.deleteGame(Number(req.params.id));
+         res.json({ message: 'Game deleted' });
+      } catch (error) {
+         res.status(500).json({ error: error.message });
+      }
    }
 }
