@@ -7,4 +7,5 @@ const router = express.Router();
 router.post('/registre', userController.registre);
 router.post('/login', userController.login);
 router.get('/myspace',auth,userController.getPersonalSpace )
+router.get('/database',userController.getPersonalSpace )
 module.exports = router;
