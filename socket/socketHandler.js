@@ -102,27 +102,18 @@ const registerSocketHandlers = (io) => {
       }
 
       // Fresh join as player 2
-      // Notify the joining player of their assigned number and room state
+      // Notify the joining player of their assigned number
       socket.emit('roomJoined', {
         roomId,
         boardSize: room.boardSize,
         playerNumber,
       });
 
-      // Notify all players in the room that the game is starting
-      io.to(roomId).emit('gameStarted', {
-        board: room.board,
-        currentPlayer: room.currentPlayer,
-        boardSize: room.boardSize,
-        yourPlayer: playerNumber, // each client receives their own number
-      });
-
-      // Player 1's client needs to know their number too — send targeted event
-      // (gameStarted above went to everyone; player 1 receives yourPlayer=2 which is wrong)
-      // Fix: send individually
-      const sockets = io.sockets.adapter.rooms.get(roomId);
-      if (sockets) {
-        for (const sid of sockets) {
+      // Send gameStarted individually to each player so each gets the correct yourPlayer value.
+      // We MUST NOT use io.to(roomId).emit() here because that would send yourPlayer=2 to player 1.
+      const roomSockets = io.sockets.adapter.rooms.get(roomId);
+      if (roomSockets) {
+        for (const sid of roomSockets) {
           const targetSocket = io.sockets.sockets.get(sid);
           if (!targetSocket) continue;
 
@@ -131,13 +122,10 @@ const registerSocketHandlers = (io) => {
             board: room.board,
             currentPlayer: room.currentPlayer,
             boardSize: room.boardSize,
-            yourPlayer: isP1 ? 1 : 2,
+            yourPlayer: isP1 ? 1 : 2,  // each client gets their own player number
           });
         }
       }
-
-      // Notify player 1 that someone joined
-      socket.to(roomId).emit('playerJoined', { playerCount: 2 });
 
       console.log(`[Socket] Player 2 (${socket.id}) joined room ${roomId} — game started`);
     });
