@@ -13,6 +13,7 @@
 
 const { randomUUID } = require('crypto');
 const roomModel = require('../models/roomModel');
+const gameService = require('./gameService'); // for saving to the partie table
 
 // ── In-memory room store ──────────────────────────────────────────────────────
 // Map<roomId, RoomState>
@@ -229,6 +230,11 @@ const makeMove = (roomId, socketId, col) => {
 
 /**
  * Save the completed game to the database and remove it from memory.
+ *
+ * Writes to two tables:
+ *  1. multiplayer_games — full multiplayer record (room_id, player IDs, board state)
+ *  2. partie            — shared game archive (signature, winner, mode) so the game
+ *                         appears in the existing DatabaseView alongside solo games.
  */
 const finalizeGame = async (roomId) => {
   const room = activeRooms.get(roomId);
@@ -239,6 +245,7 @@ const finalizeGame = async (roomId) => {
     room.winner === 2 ? 'player2' :
     room.winner === 'draw' ? 'draw' : null;
 
+  // ── 1. Save to multiplayer_games ─────────────────────────────────────────
   try {
     await roomModel.saveCompletedGame(roomId, {
       player2Id: room.player2 ? room.player2.socketId : null,
@@ -247,7 +254,37 @@ const finalizeGame = async (roomId) => {
       boardState: room.board,
     });
   } catch (err) {
-    console.error(`[RoomService] Failed to save game ${roomId}:`, err.message);
+    console.error(`[RoomService] Failed to save to multiplayer_games (${roomId}):`, err.message);
+  }
+
+  // ── 2. Also save to partie table (shared game archive) ───────────────────
+  // The signature is the column-number sequence — same format as single-player games.
+  const signature = room.moveHistory.map((m) => m.col).join('');
+  if (signature.length > 0) {
+    const startingPlayer = room.moveHistory[0]?.player === 1 ? 'red' : 'yellow';
+    const winnerPlayer = room.winner === 1 ? 1 : room.winner === 2 ? 2 : null;
+    const boardSizeStr = `${room.boardSize.rows}x${room.boardSize.cols}`;
+
+    try {
+      await gameService.saveGame(
+        signature,
+        'online',                             // mode
+        'multiplayer',                        // type_partie
+        'finished',                           // status
+        startingPlayer,                       // joueur_depart
+        winnerPlayer,                         // joueur_gagnant
+        room.winningCells.length             // ligne_gagnante
+          ? JSON.stringify(room.winningCells)
+          : null,
+        null,                                 // bga_table_id
+        boardSizeStr,
+      );
+    } catch (err) {
+      // Duplicate signatures are silently ignored by gameService; log other errors.
+      if (!err.message?.includes('already exists')) {
+        console.error(`[RoomService] Failed to save to partie (${roomId}):`, err.message);
+      }
+    }
   }
 
   activeRooms.delete(roomId);
