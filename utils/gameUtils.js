@@ -85,7 +85,7 @@ module.exports = {
       return signature.split('').map(col => {
          const colNum = parseInt(col, 10);
          if (isNaN(colNum)) return col;
-         return String(cols - 1 - colNum);
+         return String(cols + 1 - colNum);
       }).join('');
    },
 

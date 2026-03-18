@@ -1,5 +1,5 @@
-Found 8 JSON files to import
-Files: game_801839027.json, game_806484855.json, game_806493437.json, game_806494806.json, game_806499528.json, game_806763649.json, game_806776639.json, game_806886109.json
+Found 48 JSON files to import
+Files: game_801839027.json, game_806484855.json, game_806493437.json, game_806494806.json, game_806499528.json, game_806763649.json, game_806776639.json, game_806886109.json, game_807813564.json, game_807814297.json, game_807815137.json, game_807816355.json, game_807816504.json, game_807850169.json, game_807862775.json, game_807873209.json, game_807874067.json, game_807888664.json, game_807889665.json, game_808121398.json, game_808133921.json, game_808151221.json, game_808484776.json, game_808486478.json, game_809084037.json, game_809147787.json, game_809170533.json, game_809171069.json, game_809188483.json, game_810017411.json, game_810441929.json, game_810528242.json, game_811848843.json, game_812120256.json, game_812200891.json, game_812208333.json, game_812208693.json, game_812209370.json, game_812237087.json, game_812322504.json, game_812362357.json, game_812750983.json, game_812751774.json, game_813131466.json, game_813398180.json, game_813685940.json, game_815496006.json, game_816518007.json
 
 --- Processing game_801839027.json ---
 Parsed: signature=9996566588362444845445653777, status=finished, joueur_depart=Y, joueur_gagnant=Y
@@ -33,9 +33,169 @@ Skipped (duplicate original): Game with signature 3736589742477544335585222 alre
 Parsed: signature=5555566668923323688566565586889823322338829923322191199911119117747, status=finished, joueur_depart=null, joueur_gagnant=Y
 Skipped (duplicate original): Game with signature 5555566668923323688566565586889823322338829923322191199911119117747 already exists
 
+--- Processing game_807813564.json ---
+Parsed: signature=5555588225462797224478876, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5555588225462797224478876 already exists
+
+--- Processing game_807814297.json ---
+Parsed: signature=5555567677775755728921234334, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5555567677775755728921234334 already exists
+
+--- Processing game_807815137.json ---
+Parsed: signature=5554434218447785776, status=ongoing, joueur_depart=Y, joueur_gagnant=null
+Skipped (duplicate original): Game with signature 5554434218447785776 already exists
+
+--- Processing game_807816355.json ---
+Parsed: signature=54675564435216645655366448877, status=finished, joueur_depart=R, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 54675564435216645655366448877 already exists
+
+--- Processing game_807816504.json ---
+Parsed: signature=555564667867, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 555564667867 already exists
+
+--- Processing game_807850169.json ---
+Parsed: signature=555664665855827134484, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 555664665855827134484 already exists
+
+--- Processing game_807862775.json ---
+Parsed: signature=3588555774647757552332374, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 3588555774647757552332374 already exists
+
+--- Processing game_807873209.json ---
+Parsed: signature=5557777557362444424754498887758222882245541791113333111221333, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5557777557362444424754498887758222882245541791113333111221333 already exists
+
+--- Processing game_807874067.json ---
+Parsed: signature=55566664453, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 55566664453 already exists
+
+--- Processing game_807888664.json ---
+Parsed: signature=537655676637794, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 537655676637794 already exists
+
+--- Processing game_807889665.json ---
+Parsed: signature=55555888854333353553884898839976677, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 55555888854333353553884898839976677 already exists
+
+--- Processing game_808121398.json ---
+Parsed: signature=545455464663444212122821333, status=finished, joueur_depart=R, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 545455464663444212122821333 already exists
+
+--- Processing game_808133921.json ---
+Parsed: signature=555446474455398877676, status=finished, joueur_depart=R, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 555446474455398877676 already exists
+
+--- Processing game_808151221.json ---
+Parsed: signature=7374555533686665855777666776883611571333439999317511212112222222999888, status=finished, joueur_depart=R, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 7374555533686665855777666776883611571333439999317511212112222222999888 already exists
+
+--- Processing game_808484776.json ---
+Parsed: signature=55555666689233233232622344444, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 55555666689233233232622344444 already exists
+
+--- Processing game_808486478.json ---
+Parsed: signature=55555666689832388633385855833385381111111117767, status=finished, joueur_depart=R, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 55555666689832388633385855833385381111111117767 already exists
+
+--- Processing game_809084037.json ---
+Parsed: signature=5455574779889978778966668, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5455574779889978778966668 already exists
+
+--- Processing game_809147787.json ---
+Parsed: signature=555555644244222131242245455422878888666, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 555555644244222131242245455422878888666 already exists
+
+--- Processing game_809170533.json ---
+Parsed: signature=5344445576675532344545533344533776667318111666969999111119977797988888, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5344445576675532344545533344533776667318111666969999111119977797988888 already exists
+
+--- Processing game_809171069.json ---
+Parsed: signature=3736555577757557698833141133375775388388811111166444444442222222228899, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 3736555577757557698833141133375775388388811111166444444442222222228899 already exists
+
+--- Processing game_809188483.json ---
+Parsed: signature=5465554442786, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5465554442786 already exists
+
+--- Processing game_810017411.json ---
+Parsed: signature=555444466766548775888, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 555444466766548775888 already exists
+
+--- Processing game_810441929.json ---
+Parsed: signature=5555676643446362, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5555676643446362 already exists
+
+--- Processing game_810528242.json ---
+Parsed: signature=555556676898696, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 555556676898696 already exists
+
+--- Processing game_811848843.json ---
+Parsed: signature=55556766434787765664389888863434, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 55556766434787765664389888863434 already exists
+
+--- Processing game_812120256.json ---
+Parsed: signature=3213533546444436663346689887772552, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 3213533546444436663346689887772552 already exists
+
+--- Processing game_812200891.json ---
+Parsed: signature=555543676676466443, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 555543676676466443 already exists
+
+--- Processing game_812208333.json ---
+Parsed: signature=55645466758, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 55645466758 already exists
+
+--- Processing game_812208693.json ---
+Parsed: signature=55566664434452156336222, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 55566664434452156336222 already exists
+
+--- Processing game_812209370.json ---
+Parsed: signature=4544555848588766675564467, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 4544555848588766675564467 already exists
+
+--- Processing game_812237087.json ---
+Parsed: signature=37365558967266752765655674848, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 37365558967266752765655674848 already exists
+
+--- Processing game_812322504.json ---
+Parsed: signature=2585555231333232277464, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 2585555231333232277464 already exists
+
+--- Processing game_812362357.json ---
+Parsed: signature=3736558742677565567677689886999688998755847333413462, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 3736558742677565567677689886999688998755847333413462 already exists
+
+--- Processing game_812750983.json ---
+Parsed: signature=555556666837, status=ongoing, joueur_depart=Y, joueur_gagnant=null
+Skipped (duplicate original): Game with signature 555556666837 already exists
+
+--- Processing game_812751774.json ---
+Parsed: signature=5556666338547765444, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5556666338547765444 already exists
+
+--- Processing game_813131466.json ---
+Parsed: signature=5555588444421222777887754466666, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5555588444421222777887754466666 already exists
+
+--- Processing game_813398180.json ---
+Parsed: signature=555555673444467777443377335343393449299822288, status=finished, joueur_depart=null, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 555555673444467777443377335343393449299822288 already exists
+
+--- Processing game_813685940.json ---
+Parsed: signature=55555666683779, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 55555666683779 already exists
+
+--- Processing game_815496006.json ---
+Parsed: signature=5556666533462, status=finished, joueur_depart=Y, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 5556666533462 already exists
+
+--- Processing game_816518007.json ---
+Parsed: signature=45655566467877873888, status=finished, joueur_depart=R, joueur_gagnant=Y
+Skipped (duplicate original): Game with signature 45655566467877873888 already exists
+
 === Import Summary ===
-Total files: 8
+Total files: 48
 Successful: 0
-Skipped (duplicates): 8
+Skipped (duplicates): 48
 Errors: 0
 DB connection closed.

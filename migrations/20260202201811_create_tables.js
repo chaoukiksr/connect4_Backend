@@ -68,5 +68,6 @@ exports.up = function (knex) {
 exports.down = function (knex) {
    return knex.schema
       .dropTableIfExists('situation')
-      .dropTableIfExists('partie');
+      .dropTableIfExists('partie')
+      .dropTableIfExists('user');
 };

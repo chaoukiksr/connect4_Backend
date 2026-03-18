@@ -19,6 +19,26 @@ function clearLog() {
 }
 
 /**
+ * Normalize winning_line to [{row, col}] with 0-indexed coordinates.
+ *
+ * BGA encodes cells as a single number: row * 100 + col (1-indexed).
+ *   e.g. 307 → row 3, col 7 (1-indexed) → {row: 2, col: 6} (0-indexed)
+ *
+ * Already-normalized arrays of {row, col} objects are passed through unchanged.
+ */
+function normalizeWinningLine(winning_line) {
+   if (!Array.isArray(winning_line) || winning_line.length === 0) return null;
+
+   return winning_line.map(cell => {
+      if (typeof cell === 'number') {
+         return { row: Math.floor(cell / 100) - 1, col: (cell % 100) - 1 };
+      }
+      // already {row, col}
+      return { row: cell.row, col: cell.col };
+   });
+}
+
+/**
  * Convert player ID to character ('R' or 'Y')
  * If player ID is even → 'R', odd → 'Y', null → null
  */
@@ -42,7 +62,7 @@ function parseGameFile(filePath) {
          status: gameData.status || 'finished',
          joueur_depart: convertPlayerIdToChar(gameData.starting_player),
          joueur_gagnant: convertPlayerIdToChar(gameData.winning_player),
-         ligne_gagnante: gameData.winning_line ? JSON.stringify(gameData.winning_line) : null,
+         ligne_gagnante: gameData.winning_line ? JSON.stringify(normalizeWinningLine(gameData.winning_line)) : null,
          mode: 'BGA',
          type_partie: 'scraped'
       };

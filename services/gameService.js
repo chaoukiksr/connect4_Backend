@@ -89,11 +89,23 @@ module.exports = {
       const validatedTypePart = typeof type_partie === 'string' ? type_partie : (type_partie ? String(type_partie) : 'random');
       const validatedStatus = typeof status === 'string' ? status : 'finished';
 
-      // Ensure ligne_gagnante is either null or a proper JSON string
+      // Normalize and serialize ligne_gagnante to [{row, col}] JSON string.
+      // BGA encodes cells as numbers (e.g. 307 → row 3 col 7, 1-indexed).
+      // All other paths already send {row, col} objects — passed through unchanged.
       let finalLigneGagnante = ligne_gagnante;
       if (finalLigneGagnante !== null && finalLigneGagnante !== undefined) {
-         if (typeof finalLigneGagnante !== 'string') {
-            finalLigneGagnante = JSON.stringify(finalLigneGagnante);
+         const parsed = typeof finalLigneGagnante === 'string'
+            ? JSON.parse(finalLigneGagnante)
+            : finalLigneGagnante;
+         if (Array.isArray(parsed)) {
+            const normalized = parsed.map(cell =>
+               typeof cell === 'number'
+                  ? { row: Math.floor(cell / 100) - 1, col: (cell % 100) - 1 }
+                  : { row: cell.row, col: cell.col }
+            );
+            finalLigneGagnante = JSON.stringify(normalized);
+         } else {
+            finalLigneGagnante = JSON.stringify(parsed);
          }
       }
 
