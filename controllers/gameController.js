@@ -3,8 +3,10 @@ const gameService = require('../services/gameService');
 module.exports = {
    getAll: async (req, res) => {
       try{
-         const games = await gameService.getAllGames();
-         res.json({games});
+         const page = parseInt(req.query.page) || 1;
+         const limit = parseInt(req.query.limit) || 100;
+         const { rows, total } = await gameService.getAllGames(page, limit);
+         res.json({ games: rows, total, page, limit });
       } catch(error){
          console.error('Error fetching games from the controller', error);
          res.status(500).json({

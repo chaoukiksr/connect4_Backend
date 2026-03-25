@@ -63,15 +63,15 @@ module.exports = {
    },
 
    getStats: async () => {
-      const [total, byWinner, avgLength] = await Promise.all([
+      const [totalRow, byWinner, avgRow] = await Promise.all([
          db(Table).count('id_partie as total').first(),
          db(Table).select('joueur_gagnant').count('* as count').groupBy('joueur_gagnant'),
-         db(Table).avg(db.raw('LENGTH(signature)') ).as('avg').first()
+         db(Table).select(db.raw('ROUND(AVG(LENGTH(signature))) as avgMoves')).first()
       ]);
       const winMap = {};
       for (const row of byWinner) winMap[row.joueur_gagnant || 'null'] = Number(row.count);
-      // Column frequency — compute from all signatures
-      const sigs = await db(Table).pluck('signature');
+      // Column frequency — sample last 500 games only
+      const sigs = await db(Table).pluck('signature').orderBy('created_at', 'desc').limit(500);
       const colFreq = Array(9).fill(0);
       for (const sig of sigs) {
          if (!sig) continue;
@@ -82,15 +82,12 @@ module.exports = {
       }
       const totalMoves = colFreq.reduce((a, b) => a + b, 0);
       const colFreqPct = colFreq.map(n => totalMoves ? Math.round((n / totalMoves) * 1000) / 10 : 0);
-      const totalGames = Number(total.total);
       return {
-         totalGames,
-         redWins:    winMap['R'] || 0,
-         yellowWins: winMap['Y'] || 0,
-         draws:      winMap['null'] || 0,
-         avgMoves:   sigs.filter(Boolean).length
-            ? Math.round(sigs.filter(Boolean).reduce((s, sig) => s + sig.length, 0) / sigs.filter(Boolean).length)
-            : 0,
+         totalGames:  Number(totalRow.total),
+         redWins:     winMap['R'] || 0,
+         yellowWins:  winMap['Y'] || 0,
+         draws:       winMap['null'] || 0,
+         avgMoves:    Number(avgRow?.avgMoves) || 0,
          colFrequency: colFreqPct,
       };
    },

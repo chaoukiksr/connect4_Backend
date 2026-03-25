@@ -4,8 +4,8 @@ const { getCanonicalSequence, analyzeGame, checkGameExists } = require('../utils
 
 module.exports = {
    //get all games
-   getAllGames: async () =>{
-      return gameModel.findAll();
+   getAllGames: async (page = 1, limit = 100) =>{
+      return gameModel.findAllPaginated(page, limit);
    },
    saveGame: async (
       signature,
