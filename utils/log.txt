@@ -1,13 +1,158 @@
-Found 48 JSON files to import
-Files: game_801839027.json, game_806484855.json, game_806493437.json, game_806494806.json, game_806499528.json, game_806763649.json, game_806776639.json, game_806886109.json, game_807813564.json, game_807814297.json, game_807815137.json, game_807816355.json, game_807816504.json, game_807850169.json, game_807862775.json, game_807873209.json, game_807874067.json, game_807888664.json, game_807889665.json, game_808121398.json, game_808133921.json, game_808151221.json, game_808484776.json, game_808486478.json, game_809084037.json, game_809147787.json, game_809170533.json, game_809171069.json, game_809188483.json, game_810017411.json, game_810441929.json, game_810528242.json, game_811848843.json, game_812120256.json, game_812200891.json, game_812208333.json, game_812208693.json, game_812209370.json, game_812237087.json, game_812322504.json, game_812362357.json, game_812750983.json, game_812751774.json, game_813131466.json, game_813398180.json, game_813685940.json, game_815496006.json, game_816518007.json
+Found 81 JSON files to import
+Files: game_801839027.json, game_804264631.json, game_804269805.json, game_804360065.json, game_804695966.json, game_804696677.json, game_804698368.json, game_804807877.json, game_805313629.json, game_805394159.json, game_805395067.json, game_805396388.json, game_805397736.json, game_805406940.json, game_805408280.json, game_805456468.json, game_805460269.json, game_805467453.json, game_805467908.json, game_806443144.json, game_806446495.json, game_806447042.json, game_806470903.json, game_806475606.json, game_806481732.json, game_806484841.json, game_806484855.json, game_806485517.json, game_806485759.json, game_806485943.json, game_806492054.json, game_806493437.json, game_806494806.json, game_806499528.json, game_806763649.json, game_806776639.json, game_806886109.json, game_806995369.json, game_807025814.json, game_807580164.json, game_807609904.json, game_807813564.json, game_807814297.json, game_807815137.json, game_807816355.json, game_807816504.json, game_807850169.json, game_807862775.json, game_807873209.json, game_807874067.json, game_807888664.json, game_807889665.json, game_808121398.json, game_808133921.json, game_808151221.json, game_808484776.json, game_808486478.json, game_809084037.json, game_809147787.json, game_809170533.json, game_809171069.json, game_809188483.json, game_810017411.json, game_810441929.json, game_810528242.json, game_811848843.json, game_812120256.json, game_812200891.json, game_812208333.json, game_812208693.json, game_812209370.json, game_812237087.json, game_812322504.json, game_812362357.json, game_812750983.json, game_812751774.json, game_813131466.json, game_813398180.json, game_813685940.json, game_815496006.json, game_816518007.json
 
 --- Processing game_801839027.json ---
 Parsed: signature=9996566588362444845445653777, status=finished, joueur_depart=Y, joueur_gagnant=Y
 Skipped (duplicate original): Game with signature 9996566588362444845445653777 already exists
 
+--- Processing game_804264631.json ---
+Parsed: signature=55555886897788766, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253103, signature=55555886897788766
+✓ Inserted 17 situations
+
+--- Processing game_804269805.json ---
+Parsed: signature=155466565566345634444115649779455664187, status=ongoing, joueur_depart=null, joueur_gagnant=null
+✓ Inserted partie: ID=253104, signature=155466565566345634444115649779455664187
+✓ Inserted 39 situations
+
+--- Processing game_804360065.json ---
+Parsed: signature=5555463244342445222558497786666633, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253105, signature=5555463244342445222558497786666633
+✓ Inserted 34 situations
+
+--- Processing game_804695966.json ---
+Parsed: signature=555667689774888, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253106, signature=555667689774888
+✓ Inserted 15 situations
+
+--- Processing game_804696677.json ---
+Parsed: signature=54555443464453312212322, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253107, signature=54555443464453312212322
+✓ Inserted 23 situations
+
+--- Processing game_804698368.json ---
+Parsed: signature=55555664674898663, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253108, signature=55555664674898663
+✓ Inserted 17 situations
+
+--- Processing game_804807877.json ---
+Parsed: signature=55555564488444222222676688668456644556488889977, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253109, signature=55555564488444222222676688668456644556488889977
+✓ Inserted 47 situations
+
+--- Processing game_805313629.json ---
+Parsed: signature=111555444545541632333877262, status=finished, joueur_depart=R, joueur_gagnant=R
+✓ Inserted partie: ID=253110, signature=111555444545541632333877262
+✓ Inserted 27 situations
+
+--- Processing game_805394159.json ---
+Parsed: signature=5956687755677466447, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253111, signature=5956687755677466447
+✓ Inserted 19 situations
+
+--- Processing game_805395067.json ---
+Parsed: signature=5656556656279337392662477, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253112, signature=5656556656279337392662477
+✓ Inserted 25 situations
+
+--- Processing game_805396388.json ---
+Parsed: signature=555959556991437, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253113, signature=555959556991437
+✓ Inserted 15 situations
+
+--- Processing game_805397736.json ---
+Parsed: signature=55595655687779888, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253114, signature=55595655687779888
+✓ Inserted 17 situations
+
+--- Processing game_805406940.json ---
+Parsed: signature=5955566784748, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253115, signature=5955566784748
+✓ Inserted 13 situations
+
+--- Processing game_805408280.json ---
+Parsed: signature=373345454455777512213558688443386424335483587778877899999999922222211, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253116, signature=373345454455777512213558688443386424335483587778877899999999922222211
+✓ Inserted 69 situations
+
+--- Processing game_805456468.json ---
+Parsed: signature=55544447752775797766544545666, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253117, signature=55544447752775797766544545666
+✓ Inserted 29 situations
+
+--- Processing game_805460269.json ---
+Parsed: signature=5552252422577633334, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253118, signature=5552252422577633334
+✓ Inserted 19 situations
+
+--- Processing game_805467453.json ---
+Parsed: signature=5775557577573772333223464985644489886, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253119, signature=5775557577573772333223464985644489886
+✓ Inserted 37 situations
+
+--- Processing game_805467908.json ---
+Parsed: signature=555664636653857777898, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253120, signature=555664636653857777898
+✓ Inserted 21 situations
+
+--- Processing game_806443144.json ---
+Parsed: signature=4544522466551445577111112222777733, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253122, signature=4544522466551445577111112222777733
+✓ Inserted 34 situations
+
+--- Processing game_806446495.json ---
+Parsed: signature=45344331553633414455775116667777661122, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253123, signature=45344331553633414455775116667777661122
+✓ Inserted 38 situations
+
+--- Processing game_806447042.json ---
+Parsed: signature=4522133225355323166665532667171, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253124, signature=4522133225355323166665532667171
+✓ Inserted 31 situations
+
+--- Processing game_806470903.json ---
+Parsed: signature=42222444446275555373775757266, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253125, signature=42222444446275555373775757266
+✓ Inserted 29 situations
+
+--- Processing game_806475606.json ---
+Parsed: signature=4445555427331, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253126, signature=4445555427331
+✓ Inserted 13 situations
+
+--- Processing game_806481732.json ---
+Parsed: signature=45443434455655122122522333, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253127, signature=45443434455655122122522333
+✓ Inserted 26 situations
+
+--- Processing game_806484841.json ---
+Parsed: signature=22314544546654456633, status=finished, joueur_depart=R, joueur_gagnant=Y
+✓ Inserted partie: ID=253128, signature=22314544546654456633
+✓ Inserted 20 situations
+
 --- Processing game_806484855.json ---
 Parsed: signature=452431445215754554211333233122, status=finished, joueur_depart=R, joueur_gagnant=Y
 Skipped (duplicate original): Game with signature 452431445215754554211333233122 already exists
+
+--- Processing game_806485517.json ---
+Parsed: signature=4524134533331322222444116655665566, status=finished, joueur_depart=Y, joueur_gagnant=R
+✓ Inserted partie: ID=253129, signature=4524134533331322222444116655665566
+✓ Inserted 34 situations
+
+--- Processing game_806485759.json ---
+Parsed: signature=45555434422452272642511116666617177, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253130, signature=45555434422452272642511116666617177
+✓ Inserted 35 situations
+
+--- Processing game_806485943.json ---
+Parsed: signature=4555355233422323315771772277111166666644, status=finished, joueur_depart=R, joueur_gagnant=Y
+✓ Inserted partie: ID=253131, signature=4555355233422323315771772277111166666644
+✓ Inserted 40 situations
+
+--- Processing game_806492054.json ---
+Parsed: signature=45444221155574755477771211222166666633, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253132, signature=45444221155574755477771211222166666633
+✓ Inserted 38 situations
 
 --- Processing game_806493437.json ---
 Parsed: signature=4544332134544331113252, status=finished, joueur_depart=null, joueur_gagnant=Y
@@ -33,169 +178,188 @@ Skipped (duplicate original): Game with signature 3736589742477544335585222 alre
 Parsed: signature=5555566668923323688566565586889823322338829923322191199911119117747, status=finished, joueur_depart=null, joueur_gagnant=Y
 Skipped (duplicate original): Game with signature 5555566668923323688566565586889823322338829923322191199911119117747 already exists
 
+--- Processing game_806995369.json ---
+Parsed: signature=55566463665213433255298988797, status=finished, joueur_depart=null, joueur_gagnant=Y
+✓ Inserted partie: ID=253133, signature=55566463665213433255298988797
+✓ Inserted 29 situations
+
+--- Processing game_807025814.json ---
+Parsed: signature=373655557742444524113, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253134, signature=373655557742444524113
+✓ Inserted 21 situations
+
+--- Processing game_807580164.json ---
+Parsed: signature=3735336556756677531453351155339999776666767789999911111122222222288, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✓ Inserted partie: ID=253135, signature=3735336556756677531453351155339999776666767789999911111122222222288
+⚠ Warning: Could not insert situations: insert into `situation` (`id_partie`, `joueur`, `numero_coup`, `plateau`) values (253135, 'R', 59, '[[\"Y\",0,\"Y\",0,\"Y\",\"Y\",\"Y\",0,\"Y\"],[\"R\",0,\"R\",0,\"R\",\"Y\",\"R\",0,\"R\"],[\"Y\",0,\"R\",0,\"Y\",\"R\",\"R\",0,\"Y\"],[\"R\",0,\"Y\",0,\"R\",\"Y\",\"Y\",0,\"R\"],[\"Y\",0,\"Y\",0,\"R\",\"R\",\"R\",0,\"Y\"],[\"R\",0,\"Y\",0,\"Y\",\"Y\",\"Y\",0,\"Y\"],[\"Y\",\"R\",\"R\",0,\"R\",\"R\",\"R\",0,\"R\"],[\"R\",\"Y\",\"R\",0,\"Y\",\"Y\",\"R\",0,\"Y\"],[\"R\",\"R\",\"R\",\"Y\",\"Y\",\"R\",\"Y\",\"R\",\"R\"]]') - read ECONNRESET
+
+--- Processing game_807609904.json ---
+Parsed: signature=8535566476654, status=finished, joueur_depart=Y, joueur_gagnant=Y
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
+
 --- Processing game_807813564.json ---
 Parsed: signature=5555588225462797224478876, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5555588225462797224478876 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807814297.json ---
 Parsed: signature=5555567677775755728921234334, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5555567677775755728921234334 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807815137.json ---
 Parsed: signature=5554434218447785776, status=ongoing, joueur_depart=Y, joueur_gagnant=null
-Skipped (duplicate original): Game with signature 5554434218447785776 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807816355.json ---
 Parsed: signature=54675564435216645655366448877, status=finished, joueur_depart=R, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 54675564435216645655366448877 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807816504.json ---
 Parsed: signature=555564667867, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 555564667867 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807850169.json ---
 Parsed: signature=555664665855827134484, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 555664665855827134484 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807862775.json ---
 Parsed: signature=3588555774647757552332374, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 3588555774647757552332374 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807873209.json ---
 Parsed: signature=5557777557362444424754498887758222882245541791113333111221333, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5557777557362444424754498887758222882245541791113333111221333 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807874067.json ---
 Parsed: signature=55566664453, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 55566664453 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807888664.json ---
 Parsed: signature=537655676637794, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 537655676637794 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_807889665.json ---
 Parsed: signature=55555888854333353553884898839976677, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 55555888854333353553884898839976677 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_808121398.json ---
 Parsed: signature=545455464663444212122821333, status=finished, joueur_depart=R, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 545455464663444212122821333 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_808133921.json ---
 Parsed: signature=555446474455398877676, status=finished, joueur_depart=R, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 555446474455398877676 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_808151221.json ---
 Parsed: signature=7374555533686665855777666776883611571333439999317511212112222222999888, status=finished, joueur_depart=R, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 7374555533686665855777666776883611571333439999317511212112222222999888 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_808484776.json ---
 Parsed: signature=55555666689233233232622344444, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 55555666689233233232622344444 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_808486478.json ---
 Parsed: signature=55555666689832388633385855833385381111111117767, status=finished, joueur_depart=R, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 55555666689832388633385855833385381111111117767 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_809084037.json ---
 Parsed: signature=5455574779889978778966668, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5455574779889978778966668 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_809147787.json ---
 Parsed: signature=555555644244222131242245455422878888666, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 555555644244222131242245455422878888666 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_809170533.json ---
 Parsed: signature=5344445576675532344545533344533776667318111666969999111119977797988888, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5344445576675532344545533344533776667318111666969999111119977797988888 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_809171069.json ---
 Parsed: signature=3736555577757557698833141133375775388388811111166444444442222222228899, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 3736555577757557698833141133375775388388811111166444444442222222228899 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_809188483.json ---
 Parsed: signature=5465554442786, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5465554442786 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_810017411.json ---
 Parsed: signature=555444466766548775888, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 555444466766548775888 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_810441929.json ---
 Parsed: signature=5555676643446362, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5555676643446362 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_810528242.json ---
 Parsed: signature=555556676898696, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 555556676898696 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_811848843.json ---
 Parsed: signature=55556766434787765664389888863434, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 55556766434787765664389888863434 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812120256.json ---
 Parsed: signature=3213533546444436663346689887772552, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 3213533546444436663346689887772552 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812200891.json ---
 Parsed: signature=555543676676466443, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 555543676676466443 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812208333.json ---
 Parsed: signature=55645466758, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 55645466758 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812208693.json ---
 Parsed: signature=55566664434452156336222, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 55566664434452156336222 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812209370.json ---
 Parsed: signature=4544555848588766675564467, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 4544555848588766675564467 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812237087.json ---
 Parsed: signature=37365558967266752765655674848, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 37365558967266752765655674848 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812322504.json ---
 Parsed: signature=2585555231333232277464, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 2585555231333232277464 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812362357.json ---
 Parsed: signature=3736558742677565567677689886999688998755847333413462, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 3736558742677565567677689886999688998755847333413462 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812750983.json ---
 Parsed: signature=555556666837, status=ongoing, joueur_depart=Y, joueur_gagnant=null
-Skipped (duplicate original): Game with signature 555556666837 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_812751774.json ---
 Parsed: signature=5556666338547765444, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5556666338547765444 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_813131466.json ---
 Parsed: signature=5555588444421222777887754466666, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5555588444421222777887754466666 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_813398180.json ---
 Parsed: signature=555555673444467777443377335343393449299822288, status=finished, joueur_depart=null, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 555555673444467777443377335343393449299822288 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_813685940.json ---
 Parsed: signature=55555666683779, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 55555666683779 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_815496006.json ---
 Parsed: signature=5556666533462, status=finished, joueur_depart=Y, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 5556666533462 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 --- Processing game_816518007.json ---
 Parsed: signature=45655566467877873888, status=finished, joueur_depart=R, joueur_gagnant=Y
-Skipped (duplicate original): Game with signature 45655566467877873888 already exists
+✗ Error: getaddrinfo ENOTFOUND gateway01.eu-central-1.prod.aws.tidbcloud.com
 
 === Import Summary ===
-Total files: 48
-Successful: 0
-Skipped (duplicates): 48
-Errors: 0
+Total files: 81
+Successful: 32
+Skipped (duplicates): 8
+Errors: 41
 DB connection closed.
