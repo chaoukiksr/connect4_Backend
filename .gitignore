@@ -27,7 +27,9 @@ dist-ssr
 
 ml/__pycache__/
 *.pyc
-ml/models/
+ml/models/*
+!ml/models/best_alphazero.onnx
+!ml/models/best_alphazero.onnx.data
 ml/*.onnx
 ml/*.pt
 ml/*.onnx.data
