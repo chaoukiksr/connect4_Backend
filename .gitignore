@@ -24,3 +24,14 @@ dist-ssr
 *.sw?
 
 .env
+
+ml/__pycache__/
+*.pyc
+ml/models/
+ml/*.onnx
+ml/*.pt
+ml/*.onnx.data
+
+chrome-profile/
+scraped.json
+bot-games.json

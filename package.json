@@ -7,7 +7,15 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "import": "node utils/importParties.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ml:train": "python ml/train_connect4.py --mode train",
+    "ml:evaluate": "python ml/train_connect4.py --mode evaluate",
+    "ml:alphazero": "python ml/alphazero.py --iterations 30 --games 80 --simulations 100",
+    "ml:alphazero:fast": "python ml/alphazero.py --iterations 10 --games 40 --simulations 50 --res-blocks 3 --channels 64",
+    "ml:export": "python ml/alphazero.py --export-only ml/models/best_alphazero.pt",
+    "ml:pretrain": "python ml/pretrain_from_db.py",
+    "ml:pretrain:then:train": "python ml/pretrain_from_db.py --output ml/models/pretrained.pt && python ml/alphazero.py --iterations 20 --resume ml/models/pretrained.pt",
+    "ml:setup": "pip install -r ml/requirements.txt"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +30,8 @@
     "jsonwebtoken": "^9.0.3",
     "knex": "^3.1.0",
     "mysql2": "^3.16.2",
-    "puppeteer-core": "^24.37.5",
+    "onnxruntime-node": "^1.24.3",
+    "puppeteer": "^24.40.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "socket.io": "^4.8.3"

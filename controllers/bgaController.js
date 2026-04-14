@@ -1,29 +1,52 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const path = require('path');
+const fs = require('fs');
 
 puppeteer.use(StealthPlugin());
-
-const SCRAPPER_PROFILE = path.join(__dirname, '../../scrapper/automation-profile');
-const CHROME_PATH = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function scrapeTable(tableId) {
-  const browser = await puppeteer.launch({
-    headless: false,
-    executablePath: CHROME_PATH,
-    userDataDir: SCRAPPER_PROFILE,
-    args: ['--start-maximized', '--disable-blink-features=AutomationControlled'],
-  });
+  // Prepare user data directory if it exists, otherwise use default
+  let userDataDir = undefined;
+  const SCRAPPER_PROFILE = path.join(__dirname, '../../scrapper/automation-profile');
+  if (fs.existsSync(SCRAPPER_PROFILE)) {
+    userDataDir = SCRAPPER_PROFILE;
+  }
 
+  const launchOptions = {
+    headless: true,
+    args: [
+      '--disable-blink-features=AutomationControlled',
+      '--no-sandbox',  // Required for most deployment environments
+      '--disable-setuid-sandbox',
+    ],
+  };
+
+  // Add userDataDir if available
+  if (userDataDir) {
+    launchOptions.userDataDir = userDataDir;
+  }
+
+
+  // Optional: use system Chrome if environment variable is set
+  // Otherwise puppeteer uses its bundled Chromium automatically
+  if (process.env.CHROME_EXECUTABLE_PATH) {
+    launchOptions.executablePath = process.env.CHROME_EXECUTABLE_PATH;
+  }
+
+  const browser = await puppeteer.launch(launchOptions);
   const page = await browser.newPage();
   await page.setUserAgent(
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
   );
   await page.setViewport({ width: 1366, height: 768 });
+  
+  // Set longer default timeout for deployed environments
+  page.setDefaultTimeout(60000);
 
   try {
     const url = `https://boardgamearena.com/table?table=${tableId}`;
@@ -119,6 +142,15 @@ module.exports = {
       res.json(result);
     } catch (err) {
       console.error('[BGA scrape error]', err.message);
+      
+      // Provide helpful error messages for common deployment issues
+      if (err.message.includes('Failed to launch') || err.message.includes('executablePath')) {
+        return res.status(500).json({
+          error: 'Browser not available on this server. Set CHROME_EXECUTABLE_PATH environment variable.',
+          details: err.message,
+        });
+      }
+      
       res.status(500).json({ error: err.message });
     }
   },

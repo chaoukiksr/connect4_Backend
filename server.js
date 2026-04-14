@@ -25,6 +25,7 @@ const bgaRoutes       = require('./routes/bga.js');
 const suggestRoutes   = require('./routes/suggest.js');
 const probabilityRoutes = require('./routes/probability.js');
 const roomRoutes      = require('./routes/rooms');
+const mlRoutes        = require('./routes/mlRoutes');
 
 app.use('/api/games', gameRoutes);
 app.use('/api', situationRoutes);
@@ -33,6 +34,7 @@ app.use('/api/bga', bgaRoutes);
 app.use('/api/suggest-move', suggestRoutes);
 app.use('/api/probability', probabilityRoutes);
 app.use('/api/rooms', roomRoutes);   // Multiplayer rooms
+app.use('/api/ml', mlRoutes);        // ML AI (AlphaZero)
 
 app.get('/', (req, res) => {
   res.json({ message: 'Connect4 API is running', multiplayer: true });
@@ -55,7 +57,16 @@ const io = new Server(server, {
 registerSocketHandlers(io);
 
 // ── Start ─────────────────────────────────────────────────────────────────────
-server.listen(PORT, () => {
+server.listen(PORT, async () => {
   console.log(`[Server] Running on port ${PORT}`);
   console.log(`[Server] Multiplayer WebSocket enabled`);
+
+  // Try to load ML model at startup (non-fatal if not present)
+  try {
+    const mlService = require('./services/mlService');
+    await mlService.loadModel();
+  } catch (err) {
+    console.warn(`[Server] ML model not loaded: ${err.message}`);
+    console.warn('[Server] Train a model with: python ml/alphazero.py --iterations 30');
+  }
 });
