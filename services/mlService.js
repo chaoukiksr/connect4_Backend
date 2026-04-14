@@ -21,6 +21,7 @@
  */
 
 const path = require('path');
+const fs = require('fs');
 
 // ── ONNX runtime (optional dep — graceful fallback if not installed) ──────────
 let ort = null;
@@ -34,6 +35,7 @@ try {
 // ── Module state ──────────────────────────────────────────────────────────────
 let _session = null;
 const DEFAULT_MODEL_PATH = path.join(__dirname, '..', 'ml', 'models', 'best_alphazero.onnx');
+const FALLBACK_MODEL_PATH = path.join(__dirname, '..', 'ml', 'model.onnx');
 
 const ROWS = 6;
 const COLS = 7;
@@ -49,8 +51,29 @@ const COLS = 7;
 async function loadModel(modelPath = DEFAULT_MODEL_PATH) {
   if (!ort) throw new Error('onnxruntime-node is not installed');
   if (_session) return; // already loaded
-  _session = await ort.InferenceSession.create(modelPath);
-  console.log(`[mlService] Model loaded: ${modelPath}`);
+
+  const envPath = process.env.ML_MODEL_PATH && process.env.ML_MODEL_PATH.trim();
+  const candidates = [envPath, modelPath, FALLBACK_MODEL_PATH].filter(Boolean);
+
+  let lastError = null;
+  for (const candidate of candidates) {
+    try {
+      if (!fs.existsSync(candidate)) {
+        continue;
+      }
+      _session = await ort.InferenceSession.create(candidate);
+      console.log(`[mlService] Model loaded: ${candidate}`);
+      return;
+    } catch (err) {
+      lastError = err;
+      console.warn(`[mlService] Failed to load model at ${candidate}: ${err.message}`);
+    }
+  }
+
+  if (lastError) {
+    throw new Error(`Unable to load any ML model (${lastError.message})`);
+  }
+  throw new Error('Unable to load any ML model (no candidate file found)');
 }
 
 /** @returns {boolean} */
