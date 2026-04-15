@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const path = require('path');
 const fs = require('fs');
+const { resolveBrowserExecutable } = require('../utils/browserLaunch');
 
 puppeteer.use(StealthPlugin());
 
@@ -33,9 +34,10 @@ async function scrapeTable(tableId) {
 
 
   // Optional: use system Chrome if environment variable is set
-  // Otherwise puppeteer uses its bundled Chromium automatically
-  if (process.env.CHROME_EXECUTABLE_PATH) {
-    launchOptions.executablePath = process.env.CHROME_EXECUTABLE_PATH;
+  // Otherwise try common system locations, then Puppeteer's managed browser.
+  const executablePath = resolveBrowserExecutable();
+  if (executablePath) {
+    launchOptions.executablePath = executablePath;
   }
 
   const browser = await puppeteer.launch(launchOptions);
@@ -144,9 +146,13 @@ module.exports = {
       console.error('[BGA scrape error]', err.message);
       
       // Provide helpful error messages for common deployment issues
-      if (err.message.includes('Failed to launch') || err.message.includes('executablePath')) {
+      if (
+        err.message.includes('Failed to launch') ||
+        err.message.includes('executablePath') ||
+        err.message.includes('Could not find Chrome')
+      ) {
         return res.status(500).json({
-          error: 'Browser not available on this server. Set CHROME_EXECUTABLE_PATH environment variable.',
+          error: 'Browser not available on this server. Configure CHROME_EXECUTABLE_PATH or install a managed browser with: npx puppeteer browsers install chrome',
           details: err.message,
         });
       }
