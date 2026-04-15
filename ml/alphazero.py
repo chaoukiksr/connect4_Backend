@@ -49,6 +49,39 @@ COLS = 7
 IN_CHANNELS = 3  # current_player, opponent, turn_indicator
 
 
+def _state_legal_moves_from_encoded(state: np.ndarray) -> List[int]:
+    """Infer legal columns from encoded state channels (3, 6, 7)."""
+    occ_top = state[0, 0] + state[1, 0]
+    return [c for c in range(COLS) if occ_top[c] < 0.5]
+
+
+def _sanitize_policy_target(policy: np.ndarray, state: np.ndarray) -> np.ndarray:
+    """Return a finite, normalized policy target over legal moves."""
+    p = np.asarray(policy, dtype=np.float32).copy()
+    valid = _state_legal_moves_from_encoded(state)
+    out = np.zeros(COLS, dtype=np.float32)
+    if not valid:
+        return np.full(COLS, 1.0 / COLS, dtype=np.float32)
+
+    p = np.nan_to_num(p, nan=0.0, posinf=0.0, neginf=0.0)
+    p = np.maximum(p, 0.0)
+    out[valid] = p[valid]
+    s = float(out.sum())
+    if s <= 0.0:
+        out[valid] = 1.0 / len(valid)
+    else:
+        out /= s
+    return out
+
+
+def _model_has_non_finite_params(model: nn.Module) -> List[str]:
+    bad: List[str] = []
+    for name, param in model.state_dict().items():
+        if torch.is_tensor(param) and not torch.isfinite(param).all():
+            bad.append(name)
+    return bad
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # Game environment
 # ══════════════════════════════════════════════════════════════════════════════
@@ -355,7 +388,9 @@ class MCTS:
             action_probs = np.zeros(COLS, dtype=np.float32)
             action_probs[int(np.argmax(visits))] = 1.0
         else:
-            visits = visits ** (1.0 / temperature)
+            log_v = np.log(visits + 1e-8) / temperature
+            log_v -= log_v.max()
+            visits = np.exp(log_v)
             total = visits.sum()
             action_probs = visits / total if total > 0 else visits
 
@@ -443,16 +478,27 @@ def run_self_play(
     model.eval()
     all_examples: List[Tuple] = []
     wins = {0: 0, 1: 0, 2: 0}
+    t0 = time.time()
+    # Print at least every 4 games for typical runs so CPU jobs show heartbeat.
+    log_every = min(max(1, num_games // 20), 4)
+
+    if verbose:
+        print(f"  starting self-play: games={num_games}, sims/move={num_simulations}")
 
     for g in range(num_games):
         examples, winner = self_play_game(model, device, num_simulations)
         all_examples.extend(examples)
         wins[winner] += 1
-        if verbose and (g + 1) % max(1, num_games // 5) == 0:
+        if verbose and (((g + 1) % log_every == 0) or (g + 1 == num_games)):
+            elapsed = time.time() - t0
+            games_done = g + 1
+            sec_per_game = elapsed / games_done
+            eta = sec_per_game * (num_games - games_done)
             print(
                 f"  game {g+1}/{num_games} | "
                 f"P1={wins[1]} P2={wins[2]} D={wins[0]} | "
-                f"examples={len(all_examples)}"
+                f"examples={len(all_examples)} | "
+                f"elapsed={elapsed:.1f}s eta={eta:.1f}s"
             )
 
     return all_examples
@@ -474,11 +520,37 @@ def train_network(
     model.train()
     model.to(device)
 
-    states = torch.from_numpy(np.array([e[0] for e in examples], dtype=np.float32))
-    policies = torch.from_numpy(np.array([e[1] for e in examples], dtype=np.float32))
-    values = torch.from_numpy(
-        np.array([e[2] for e in examples], dtype=np.float32)
-    ).unsqueeze(1)
+    bad_params = _model_has_non_finite_params(model)
+    if bad_params:
+        raise RuntimeError(
+            "Loaded model contains non-finite parameters. "
+            "Checkpoint is likely corrupted. "
+            f"First bad tensors: {bad_params[:5]}"
+        )
+
+    states_np = np.array([e[0] for e in examples], dtype=np.float32)
+    policies_np = np.array([e[1] for e in examples], dtype=np.float32)
+    values_np = np.array([e[2] for e in examples], dtype=np.float32)
+
+    # Remove obviously invalid examples and sanitize policy targets.
+    finite_mask = (
+        np.isfinite(states_np).all(axis=(1, 2, 3))
+        & np.isfinite(policies_np).all(axis=1)
+        & np.isfinite(values_np)
+    )
+    states_np = states_np[finite_mask]
+    policies_np = policies_np[finite_mask]
+    values_np = values_np[finite_mask]
+
+    if len(states_np) == 0:
+        raise RuntimeError("No finite training examples available after sanitization")
+
+    for i in range(len(policies_np)):
+        policies_np[i] = _sanitize_policy_target(policies_np[i], states_np[i])
+
+    states = torch.from_numpy(states_np)
+    policies = torch.from_numpy(policies_np)
+    values = torch.from_numpy(values_np).unsqueeze(1)
 
     loader = DataLoader(
         TensorDataset(states, policies, values),
@@ -496,9 +568,19 @@ def train_network(
         for xb, pb, vb in loader:
             xb, pb, vb = xb.to(device), pb.to(device), vb.to(device)
             logits, value_pred = model(xb)
+            if not torch.isfinite(logits).all() or not torch.isfinite(value_pred).all():
+                raise RuntimeError(
+                    "Model produced non-finite outputs during training. "
+                    "Try training from a fresh checkpoint."
+                )
             p_loss = -torch.mean(torch.sum(pb * F.log_softmax(logits, dim=1), dim=1))
             v_loss = F.mse_loss(value_pred, vb)
             loss = p_loss + v_loss
+            if not torch.isfinite(loss):
+                raise RuntimeError(
+                    "Encountered non-finite loss. "
+                    "Inputs/targets or checkpoint are invalid."
+                )
             optimizer.zero_grad()
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -591,6 +673,11 @@ def load_checkpoint(path: str, device: torch.device) -> Tuple[Connect4Net, int]:
         num_channels=ckpt.get("num_channels", 128),
     ).to(device)
     model.load_state_dict(ckpt["model_state_dict"])
+    bad_params = _model_has_non_finite_params(model)
+    if bad_params:
+        raise ValueError(
+            f"Checkpoint contains non-finite parameters: {bad_params[:5]}"
+        )
     return model, ckpt.get("iteration", 0)
 
 
@@ -730,7 +817,15 @@ def main() -> None:
         model, start_iteration = load_checkpoint(args.resume, device)
     elif os.path.exists(best_ckpt):
         print(f"[init] resuming from {best_ckpt}")
-        model, start_iteration = load_checkpoint(best_ckpt, device)
+        try:
+            model, start_iteration = load_checkpoint(best_ckpt, device)
+        except Exception as exc:
+            print(f"[warn] failed to load best checkpoint: {exc}")
+            print("[warn] creating a fresh model instead")
+            model = Connect4Net(
+                num_res_blocks=args.res_blocks,
+                num_channels=args.channels,
+            ).to(device)
     else:
         print("[init] creating new model")
         model = Connect4Net(
