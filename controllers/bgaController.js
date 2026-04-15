@@ -2,6 +2,7 @@ const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const path = require('path');
 const fs = require('fs');
+const { spawnSync } = require('child_process');
 const { resolveBrowserExecutable } = require('../utils/browserLaunch');
 
 puppeteer.use(StealthPlugin());
@@ -10,7 +11,29 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function ensureBrowserAvailableForLocal() {
+  // In local/dev, auto-install managed Chrome if nothing is available.
+  // Production should rely on preinstall/deployment setup.
+  if (process.env.NODE_ENV === 'production') return;
+
+  const existing = resolveBrowserExecutable();
+  if (existing) return;
+
+  console.warn('[BGA] No browser found locally. Installing managed Chrome via Puppeteer...');
+  const result = spawnSync(
+    process.platform === 'win32' ? 'npx.cmd' : 'npx',
+    ['puppeteer', 'browsers', 'install', 'chrome'],
+    { stdio: 'inherit' }
+  );
+
+  if (result.status !== 0) {
+    throw new Error('Could not install managed Chrome automatically. Run: npx puppeteer browsers install chrome');
+  }
+}
+
 async function scrapeTable(tableId) {
+  ensureBrowserAvailableForLocal();
+
   // Prepare user data directory if it exists, otherwise use default
   let userDataDir = undefined;
   const SCRAPPER_PROFILE = path.join(__dirname, '../../scrapper/automation-profile');
