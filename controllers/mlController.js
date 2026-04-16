@@ -34,6 +34,13 @@ async function getMLMove(req, res) {
     });
   }
 
+  if (!Array.isArray(board) || board.length !== 6 || !Array.isArray(board[0]) || board[0].length !== 7) {
+    return res.status(400).json({
+      error: 'ML currently supports only 6x7 boards',
+      expected: { rows: 6, cols: 7 },
+    });
+  }
+
   const numSims = Math.min(Math.max(parseInt(simulations) || 400, 50), 1600);
 
   const result = await mlService.getBestMove(board, currentPlayer, numSims);
@@ -56,6 +63,13 @@ async function analysePosition(req, res) {
 
   if (!mlService.isModelLoaded()) {
     return res.status(503).json({ error: 'ML model not loaded' });
+  }
+
+  if (!Array.isArray(board) || board.length !== 6 || !Array.isArray(board[0]) || board[0].length !== 7) {
+    return res.status(400).json({
+      error: 'ML currently supports only 6x7 boards',
+      expected: { rows: 6, cols: 7 },
+    });
   }
 
   const numSims = Math.min(Math.max(parseInt(simulations) || 200, 50), 800);
